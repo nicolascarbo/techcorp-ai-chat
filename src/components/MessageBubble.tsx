@@ -1,5 +1,5 @@
 interface MessageBubbleProps {
-  role: 'user' | 'assistant' | 'system'
+  role: 'user' | 'assistant'
   content: string
   isStreaming?: boolean
 }
