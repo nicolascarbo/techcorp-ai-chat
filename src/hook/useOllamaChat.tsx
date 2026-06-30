@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { streamChat, type Message } from '../services/ollama'
 
-const MODEL = 'llama3:8b'
+const MODEL = 'phi3.5:latest'
 
 export function useOllamaChat() {
   const [messages, setMessages] = useState<Message[]>([])
