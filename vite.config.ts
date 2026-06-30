@@ -10,7 +10,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/ollama': {
-        target: 'http://10.33.76.134:11434',
+        target: process.env.VITE_OLLAMA_URL ?? 'http://localhost:11434',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/ollama/, ''),
       },
