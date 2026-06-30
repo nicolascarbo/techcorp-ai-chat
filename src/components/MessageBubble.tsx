@@ -9,7 +9,7 @@ function MessageBubble({ role, content, isStreaming = false }: MessageBubbleProp
 
   return (
     <div className={`message-row ${isUser ? 'message-row--user' : 'message-row--ai'}`}>
-      <span className="message-label">{isUser ? 'ME' : 'OUR AI'}</span>
+      <span className="message-label">{isUser ? 'ME' : 'AI'}</span>
       <div className={`message-bubble ${isUser ? 'message-bubble--user' : 'message-bubble--ai'}`}>
         {content}
         {isStreaming && <span className="cursor-blink" />}
