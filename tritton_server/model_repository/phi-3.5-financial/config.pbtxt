@@ -1,0 +1,10 @@
+name: "phi-3.5-financial"
+backend: "vllm"
+max_batch_size: 0
+
+instance_group [
+  {
+    count: 1
+    kind: KIND_MODEL
+  }
+]

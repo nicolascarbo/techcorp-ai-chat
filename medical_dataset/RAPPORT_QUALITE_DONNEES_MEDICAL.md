@@ -91,7 +91,7 @@ Ces réponses sont problématiques pour le fine-tuning : elles apprendraient au 
 
 ## 6. Méthodologie de détection
 
-Script : [`scripts/clean_medical_dataset.py`](scripts/clean_medical_dataset.py)
+Script : [`scripts/clean_medical_dataset.py`](file:///c:/Users/nicoc/code/techcorp-ai-chat/scripts/clean_medical_dataset.py)
 
 - **Doublons** : déduplication exacte sur la paire `(Patient, Doctor)`
 - **Réponses trop courtes** : seuil de longueur (`Doctor` < 20 caractères, `Patient` < 10 caractères)
@@ -100,7 +100,7 @@ Script : [`scripts/clean_medical_dataset.py`](scripts/clean_medical_dataset.py)
 
 ## 7. Recommandation
 
-✅ Utiliser le fichier nettoyé pour le fine-tuning LoRA : `datasets/clean/ai_medical_chatbot.clean.json` — 242 814 entrées, reformatées au format `{instruction, input, output}` identique au dataset finance, directement compatible avec [`notebooks/medical_finetune_lora.ipynb`](notebooks/medical_finetune_lora.ipynb).
+✅ Utiliser le fichier nettoyé pour le fine-tuning LoRA : `medical_dataset/clean/ai_medical_chatbot.clean.json` — 242 814 entrées, reformatées au format `{instruction, input, output}` identique au dataset finance, directement compatible avec le notebook d'entraînement.
 
 ⚠️ Vu le volume (242k entrées), un sous-échantillonnage (`SAMPLE_SIZE` dans le notebook, actuellement 3000) reste recommandé pour un entraînement raisonnable sur Colab — privilégier un échantillonnage aléatoire après nettoyage pour garder la diversité des cas médicaux sans répétitions ni réponses creuses.
 
@@ -108,23 +108,23 @@ Script : [`scripts/clean_medical_dataset.py`](scripts/clean_medical_dataset.py)
 
 Le fichier nettoyé complet pèse **~254 Mo**, au-delà de la limite stricte de GitHub (100 Mo/fichier). Il n'est donc **pas poussé dans le repo**. À la place :
 
-- [`datasets/clean/ai_medical_chatbot.sample5000.json`](datasets/clean/ai_medical_chatbot.sample5000.json) — échantillon aléatoire de **5000 entrées** (~5,2 Mo, seed fixe = 42 pour reproductibilité), généré automatiquement par le script (fonction `write_sample`). C'est ce fichier qui est commité dans `rendu/data/`.
-- Le fichier complet (242 814 entrées) reste disponible **localement**, régénérable à tout moment en relançant `clean_medical_dataset.py` (qui retélécharge/relit `medical_raw/ai_medical_chatbot_raw.json`).
+- [`medical_dataset/clean/ai_medical_chatbot.sample5000.json`](file:///c:/Users/nicoc/code/techcorp-ai-chat/medical_dataset/clean/ai_medical_chatbot.sample5000.json) — échantillon aléatoire de **5000 entrées** (~5,2 Mo, seed fixe = 42 pour reproductibilité), généré automatiquement par le script (fonction `write_sample`). C'est ce fichier qui est commité.
+- Le fichier complet (242 814 entrées) reste disponible **localement**, régénérable à tout moment en relançant [`scripts/clean_medical_dataset.py`](file:///c:/Users/nicoc/code/techcorp-ai-chat/scripts/clean_medical_dataset.py) (qui retélécharge/relit `medical_dataset/raw/ai_medical_chatbot_raw.json`).
 - Pour le fine-tuning réel sur Colab, le sous-échantillon utilisé (3000 entrées, voir notebook) peut être tiré soit du fichier complet (en local) soit de cet échantillon de 5000 (suffisant, déjà nettoyé).
 
 ## 8. Fichiers livrés
 
 ```
-rendu_data_ia/
-├── RAPPORT_QUALITE_DONNEES_MEDICAL.md     # ce rapport
-├── scripts/
-│   └── clean_medical_dataset.py
-└── datasets/
-    ├── medical_raw/
-    │   └── ai_medical_chatbot_raw.json         # dataset brut (256 916 entrées, local uniquement)
-    ├── clean/
-    │   ├── ai_medical_chatbot.clean.json       # dataset nettoyé complet (242 814 entrées, ~254MB, LOCAL UNIQUEMENT - pas sur GitHub)
-    │   └── ai_medical_chatbot.sample5000.json  # échantillon pour GitHub (5000 entrées, ~5.2MB)
-    └── reports/
-        └── ai_medical_chatbot.report.json # détail technique JSON
+techcorp-ai-chat/
+├── medical_dataset/
+│   ├── raw/
+│   │   └── ai_medical_chatbot_raw.json         # dataset brut (256 916 entrées, local uniquement)
+│   ├── clean/
+│   │   ├── ai_medical_chatbot.clean.json       # dataset nettoyé complet (242 814 entrées, ~254MB, LOCAL uniquement)
+│   │   └── ai_medical_chatbot.sample5000.json  # échantillon pour GitHub (5000 entrées, ~5.2MB)
+│   ├── reports/
+│   │   └── ai_medical_chatbot.report.json      # détail technique JSON
+│   └── RAPPORT_QUALITE_DONNEES_MEDICAL.md     # ce rapport
+└── scripts/
+    └── clean_medical_dataset.py                # script de nettoyage
 ```

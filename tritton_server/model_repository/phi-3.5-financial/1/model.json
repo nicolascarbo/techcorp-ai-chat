@@ -1,0 +1,8 @@
+{
+  "model": "Josephgflowers/Phinance-Phi-3.5-mini-instruct-finance-v0.3",
+  "gpu_memory_utilization": 0.8,
+  "max_num_seqs": 128,
+  "max_model_len": 4096,
+  "tensor_parallel_size": 1,
+  "trust_remote_code": true
+}

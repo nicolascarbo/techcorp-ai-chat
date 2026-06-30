@@ -134,10 +134,10 @@ def write_sample(clean_items, sample_path, sample_size=SAMPLE_SIZE, seed=RANDOM_
 
 def main():
     base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    src = os.path.join(base, "datasets", "medical_raw", "ai_medical_chatbot_raw.json")
-    out = os.path.join(base, "datasets", "clean", "ai_medical_chatbot.clean.json")
-    report = os.path.join(base, "datasets", "reports", "ai_medical_chatbot.report.json")
-    sample_out = os.path.join(base, "datasets", "clean", f"ai_medical_chatbot.sample{SAMPLE_SIZE}.json")
+    src = os.path.join(base, "medical_dataset", "raw", "ai_medical_chatbot_raw.json")
+    out = os.path.join(base, "medical_dataset", "clean", "ai_medical_chatbot.clean.json")
+    report = os.path.join(base, "medical_dataset", "reports", "ai_medical_chatbot.report.json")
+    sample_out = os.path.join(base, "medical_dataset", "clean", f"ai_medical_chatbot.sample{SAMPLE_SIZE}.json")
 
     clean_items = clean_medical_dataset(src, out, report)
     write_sample(clean_items, sample_out)
