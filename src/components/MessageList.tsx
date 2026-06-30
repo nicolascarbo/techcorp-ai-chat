@@ -1,32 +1,38 @@
 import { useEffect, useRef } from 'react'
 import MessageBubble from './MessageBubble'
-import TypingIndicator from './TypingIndicator'
-
-export interface Message {
-  id: string
-  role: 'user' | 'ai'
-  content: string
-}
+import type { Message } from '../services/ollama'
 
 interface MessageListProps {
   messages: Message[]
   isStreaming?: boolean
 }
 
-function MessageList({ messages, isStreaming = false }: MessageListProps) {
+function MessageList({
+  messages,
+  isStreaming = false,
+}: MessageListProps) {
   const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+    bottomRef.current?.scrollIntoView({
+      behavior: 'smooth',
+    })
   }, [messages, isStreaming])
 
   return (
     <div className="message-list">
-      {messages.map((msg) => (
-        <MessageBubble key={msg.id} role={msg.role} content={msg.content} />
+      {messages.map((msg, index) => (
+        <MessageBubble
+          key={index}
+          role={msg.role}
+          content={msg.content}
+          isStreaming={
+            isStreaming &&
+            index === messages.length - 1 &&
+            msg.role === 'assistant'
+          }
+        />
       ))}
-
-      {isStreaming && <TypingIndicator />}
 
       <div ref={bottomRef} />
     </div>

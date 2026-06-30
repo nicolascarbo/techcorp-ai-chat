@@ -3,7 +3,7 @@ import ChatBackground from './components/ChatBackground'
 import ChatHeader from './components/ChatHeader'
 import MessageList from './components/MessageList'
 import ChatInput from './components/ChatInput'
-import { useOllamaChat } from './useOllamaChat'
+import { useOllamaChat } from './hook/useOllamaChat'
 
 function App() {
   const { messages, isStreaming, sendMessage } = useOllamaChat()
